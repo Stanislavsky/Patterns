@@ -2,6 +2,9 @@ data class Student(
     private var id: Int,
     private var lastName: String,
     private var firstName: String,
+    private var middleName: String,
+    private var phone: String? = null,
+    private var telegram: String? = null,
     private var email: String? = null,
     private var gitHub: String? = null
 )
