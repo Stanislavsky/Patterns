@@ -57,7 +57,8 @@ data class Student(
                 throw IllegalArgumentException("Требуется гитхаб")
             }
             if (phone == null && telegram == null && email == null) {
-                throw IllegalArgumentException("Требуется хотя бы один контакт (номер телефона, телеграм или почта)")
+                println("Требуется хотя бы один контакт (номер телефона, телеграм или почта)")
+                println("Дальше введите контактные данные")
             }
             return true
         }
@@ -65,6 +66,11 @@ data class Student(
     init {
         if (validate(gitHub, phone, telegram, email))
         {
+            if (phone == null && email == null && telegram == null)
+            {
+                setContacts()
+            }
+            
             if (phone != null && !isValidPhone(phone)) {
                 throw IllegalArgumentException("Неверный номер телефона: $phone")
             }
@@ -76,5 +82,12 @@ data class Student(
                 throw IllegalArgumentException("Неверный гитхаб: $gitHub")
             }
         }
+    fun setContacts(newPhone: String? = readln(), newTelegram: String? = readln(), newEmail: String? = readln()) {
+        if (newPhone != null && newPhone != "")
+            phone = newPhone
+        if (newTelegram != null && newPhone != "")
+            telegram = newTelegram
+        if (newEmail != null && newEmail != "")
+            email = newEmail
     }
 }
