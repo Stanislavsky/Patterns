@@ -5,7 +5,19 @@ data class Student(
     private var email: String? = null,
     private var gitHub: String? = null
 )
+
 {
+    constructor(params: Map<String, Any>) : this(
+        id = params["id"] as Int,
+        lastName = params["lastName"] as String,
+        firstName = params["firstName"] as String,
+        middleName = params["middleName"] as String,
+        phone = params["phone"] as String?,
+        telegram = params["telegram"] as String?,
+        email = params["email"] as String?,
+        gitHub = params["gitHub"] as String?
+    )
+
     override fun toString(): String
     {
         return """
