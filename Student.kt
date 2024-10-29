@@ -39,4 +39,15 @@ data class Student(
         return id == other.id
     }
 
+    companion object {
+        fun isValidPhone(phone: String?): Boolean {
+            return phone?.matches(Regex("""^\+7\d{1,10}${'$'}""")) ?: false
+        }
+    }
+    init {
+        if (phone != null && !isValidPhone(phone)) {
+            throw IllegalArgumentException("Неверный номер телефона: $phone")
+        }
+    }
+
 }
