@@ -43,10 +43,23 @@ data class Student(
         fun isValidPhone(phone: String?): Boolean {
             return phone?.matches(Regex("""^\+7\d{1,10}${'$'}""")) ?: false
         }
+
+        fun isValidEmail(email: String?): Boolean {
+            return email?.matches(Regex("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")) ?: false
+        }
     }
     init {
         if (phone != null && !isValidPhone(phone)) {
             throw IllegalArgumentException("Неверный номер телефона: $phone")
+        }
+
+        if (email != null && !isValidEmail(email)) {
+            throw IllegalArgumentException("Неверная почта: $email")
+        }
+        gitHub?.let {
+            if (!it.startsWith("github.com/")) {
+                throw IllegalArgumentException("Неверный гитхаб: $it")
+            }
         }
     }
 
