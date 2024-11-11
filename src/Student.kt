@@ -1,62 +1,14 @@
-import java.lang.Exception
-
-class Student(var id: Int, var fullName: String, var git: String, var contact: String) {
+class Student(
+    id: Int,
+    fullName: String,
+    git: String,
+    contact: String
+): StudentBase(id, fullName, git, contact) {
 
     constructor(data: String) : this(
-        id = try {
-            val parts = data.split(",")
-            if (parts.size != 4) throw IllegalArgumentException("Неверное количество данных в строке. Ожидаются 4 значения.")
-            val idValue = parts[0].trim().toInt()
-            if (idValue <= 0) throw IllegalArgumentException("ID должен быть положительным числом.")
-            idValue
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Ошибка при парсинге ID: ${e.message}")
-        },
-
-        fullName = try {
-            val parts = data.split(",")
-            val fullNameValue = parts[1].trim()
-            if (fullNameValue.isEmpty()) throw IllegalArgumentException("ФИО не может быть пустым.")
-            fullNameValue
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Ошибка при парсинге ФИО: ${e.message}")
-        },
-
-        git = try {
-            val parts = data.split(",")
-            val gitValue = parts[2].trim()
-            if (gitValue.isEmpty() || !gitValue.startsWith("https://")) throw IllegalArgumentException("Git репозиторий должен начинаться с https://")
-            gitValue
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Ошибка при парсинге Git репозитория: ${e.message}")
-        },
-
-        contact = try {
-            val parts = data.split(",")
-            val contactValue = parts[3].trim()
-
-            if (contactValue.isEmpty() || !contactValue.matches("\\+?\\d{10,15}".toRegex())) {
-                throw IllegalArgumentException("Номер телефона должен быть валидным и содержать только цифры.")
-            }
-            contactValue
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Ошибка при парсинге контакта: ${e.message}")
-        }
+        id = parseId(data),
+        fullName = parseFullName(data),
+        git = parseGit(data),
+        contact = parseContact(data)
     )
-
-    private fun getInitials(): String {
-        val parts = fullName.split(" ")
-        val lastName = parts[0]
-        val initials = if (parts.size > 1) {
-            parts[1].take(1) + "." + parts[2].take(1)
-        } else {
-            ""
-        }
-        return "$lastName $initials"
-    }
-
-    fun getInfo(): String {
-        val initials = getInitials()
-        return "$initials; $git; $contact"
-    }
 }

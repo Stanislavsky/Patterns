@@ -1,4 +1,9 @@
-class Student_short (val ID: Int, val fullNameInitials: String, val git: String, val contact: String) {
+class Student_short(
+    ID: Int,
+    fullNameInitials: String,
+    git: String,
+    contact: String,
+) : StudentBase(ID, fullNameInitials, git, contact) {
 
     constructor(student: Student) : this(
         ID = student.id,
@@ -9,8 +14,8 @@ class Student_short (val ID: Int, val fullNameInitials: String, val git: String,
 
     constructor(ID: Int, data: String) : this(
         ID = ID,
-        fullNameInitials = data.split(",")[0].trim(),
-        git = data.split(",")[1].trim(),
-        contact = data.split(",")[2].trim()
+        fullNameInitials = parseFullName(data),
+        git = parseGit(data),
+        contact = parseContact(data)
     )
 }
