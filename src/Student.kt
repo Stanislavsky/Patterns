@@ -2,13 +2,10 @@ import java.lang.Exception
 
 class Student(var id: Int, var fullName: String, var git: String, var contact: String) {
 
-
     constructor(data: String) : this(
         id = try {
             val parts = data.split(",")
             if (parts.size != 4) throw IllegalArgumentException("Неверное количество данных в строке. Ожидаются 4 значения.")
-
-
             val idValue = parts[0].trim().toInt()
             if (idValue <= 0) throw IllegalArgumentException("ID должен быть положительным числом.")
             idValue
