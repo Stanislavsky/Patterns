@@ -2,11 +2,12 @@ import java.sql.Date
 
 fun main() {
 
-    val carData = "Toyota, Red, 2022-01-01, 180"
-    val car = Car(carData)
+    val StudentData = "34234, Максюта Станислва Витальевич, https://github.com/Stanislavsky/Patterns.git, +79182660030"
+    val Student = Student(StudentData)
 
-    println(car.color)
-    println(car.brand)
-    println(car.speed)
-    println(car.dateOfManufacture)
+    println(Student.id)
+    println(Student.fullName)
+    println(Student.git)
+    println(Student.contact)
+
 }
