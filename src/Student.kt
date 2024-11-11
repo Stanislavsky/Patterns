@@ -8,7 +8,7 @@ class Student(var id: Int, var fullName: String, var git: String, var contact: S
             val parts = data.split(",")
             if (parts.size != 4) throw IllegalArgumentException("Неверное количество данных в строке. Ожидаются 4 значения.")
 
-            
+
             val idValue = parts[0].trim().toInt()
             if (idValue <= 0) throw IllegalArgumentException("ID должен быть положительным числом.")
             idValue
@@ -37,7 +37,7 @@ class Student(var id: Int, var fullName: String, var git: String, var contact: S
         contact = try {
             val parts = data.split(",")
             val contactValue = parts[3].trim()
-            // Простая валидация контактного номера (например, номер телефона)
+
             if (contactValue.isEmpty() || !contactValue.matches("\\+?\\d{10,15}".toRegex())) {
                 throw IllegalArgumentException("Номер телефона должен быть валидным и содержать только цифры.")
             }
@@ -46,4 +46,20 @@ class Student(var id: Int, var fullName: String, var git: String, var contact: S
             throw IllegalArgumentException("Ошибка при парсинге контакта: ${e.message}")
         }
     )
+
+    private fun getInitials(): String {
+        val parts = fullName.split(" ")
+        val lastName = parts[0]
+        val initials = if (parts.size > 1) {
+            parts[1].take(1) + "." + parts[2].take(1)
+        } else {
+            ""
+        }
+        return "$lastName $initials"
+    }
+
+    fun getInfo(): String {
+        val initials = getInitials()
+        return "$initials; $git; $contact"
+    }
 }
