@@ -19,23 +19,32 @@ fun main() {
 //    val studentShort2 = Student_short(1, "Иван И., https://github.com/lelik, +79001234567")
 //    println(studentShort2.git)
 
-    val studentData = " 1, Максюта Станисалв Витальевич, https://github.com/johndoe, +72345678901"
-    val student = Student(studentData)
+//    val studentData = " 1, Максюта Станисалв Витальевич, https://github.com/johndoe, +72345678901"
+//    val student = Student(studentData)
 //    println("Student Info: ${student.getInfo()}")
-    val students = student.read_from_txt("src/students.txt")
-    println("Список студентов:")
-    students.forEach { student ->
-        println(student.getInfo())
-    }
+//    val students = student.read_from_txt("src/students.txt")
+//    println("Список студентов:")
+//    students.forEach { student ->
+//        println(student.getInfo())
+//    }
 
-    val filePath = "src/"
-    val fileName = "students_output.txt"
+//    val filePath = "src/"
+//    val fileName = "students_output.txt"
+//
+//    try {
+//        student.write_to_txt(filePath, fileName, students)
+//        println("Список студентов успешно записан в файл $fileName.")
+//    } catch (e: Exception) {
+//        println("Произошла ошибка при записи в файл: ${e.message}")
+//    }
 
-    try {
-        student.write_to_txt(filePath, fileName, students)
-        println("Список студентов успешно записан в файл $fileName.")
-    } catch (e: Exception) {
-        println("Произошла ошибка при записи в файл: ${e.message}")
-    }
+
+    val tableData = arrayOf(
+        arrayOf(1, "John", 25),
+        arrayOf(2, "Jane", 30)
+    )
+    val dataTable = Data_table(tableData)
+    println("Количество строк: ${dataTable.rowCount()}")
+    println("Количество столбцов: ${dataTable.columnCount()}")
 
 }
