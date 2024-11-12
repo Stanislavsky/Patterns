@@ -2,20 +2,15 @@ class Data_list<T : Any>(elements: List<T>) {
 
     private val data: List<T> = elements
 
-    private val selectedIndexes: MutableList<Int> = mutableListOf()
-
-    fun getElements(): List<T> = data.toList()
-
     fun select(number: Int): T {
         if (number < 0 || number >= data.size) {
             throw IndexOutOfBoundsException("Неверный индекс: $number. Индекс должен быть в пределах от 0 до ${data.size - 1}.")
         }
-        selectedIndexes.add(number)
         return data[number]
     }
 
     fun get_selected(): List<Int> {
-        return selectedIndexes.toList()
+        return data.mapIndexed { index, _ -> index }
     }
 
     fun get_names(): List<String> {
@@ -25,7 +20,30 @@ class Data_list<T : Any>(elements: List<T>) {
         }
 
         val fields = firstElement::class.java.declaredFields.map { it.name }
-
         return fields.filter { it != "id" }
+    }
+
+    fun get_data(): Data_table<Any> {
+        val tableData = mutableListOf<Array<Any>>()
+
+        val header = arrayOf<Any>("№", *get_names().toTypedArray())
+        tableData.add(header)
+
+        for ((index, element) in data.withIndex()) {
+            val row = mutableListOf<Any>()
+            row.add(index + 1)
+
+            val fields = element::class.java.declaredFields
+            for (field in fields) {
+                field.isAccessible = true
+                if (field.name != "id") {
+                    row.add(field.get(element))
+                }
+            }
+
+            tableData.add(row.toTypedArray())
+        }
+
+        return Data_table(tableData.toTypedArray())
     }
 }

@@ -69,19 +69,16 @@ fun main() {
 //    } catch (e: IndexOutOfBoundsException) {
 //        println("Ошибка: ${e.message}")
 //    }
-    val numbers = listOf(5, 2, 8, 3, 1)
-    val dataList = Data_list(numbers)
+    val students = listOf(
+        Student(1, "John Doe", "https://github.com/johndoe", "+1234567890"),
+        Student(2, "Jane Smith", "https://github.com/janesmith", "+0987654321")
+    )
 
-    println("Все элементы в Data_list (упорядоченные): ${dataList.getElements()}")
+    val dataList = Data_list(students)
 
+    val dataTable = dataList.get_data()
 
-    dataList.select(2)
-    dataList.select(0)
-
-    val selectedIds = dataList.get_selected()
-    println("Индексы выделенных элементов: $selectedIds")
-
-
-    val names = dataList.get_names()
-    println("Наименования атрибутов: $names")
+    for (row in dataTable.getTableData()) {
+        println(row.joinToString(", "))
+    }
 }

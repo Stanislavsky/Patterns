@@ -1,16 +1,25 @@
-class Data_table<T>(inputData: Array<Array<T>>) {
+class Data_table<T>(private val tableData: Array<Array<T>>) {
 
-    private val data: Array<Array<T>> = inputData
+    // Получение данных таблицы
+    fun getTableData(): Array<Array<T>> {
+        return tableData
+    }
 
-    fun rowCount(): Int = data.size
-
-    fun columnCount(): Int = if (data.isNotEmpty()) data[0].size else 0
-
-    fun getElement(row: Int, column: Int): T? {
-        return if (row in data.indices && column in data[row].indices) {
-            data[row][column]
-        } else {
-            throw IndexOutOfBoundsException("Неверные индексы: строка $row, столбец $column")
+    // Метод для получения строки по индексу
+    fun getRow(index: Int): Array<T> {
+        if (index < 0 || index >= tableData.size) {
+            throw IndexOutOfBoundsException("Неверный индекс строки: $index")
         }
+        return tableData[index]
+    }
+
+    // Метод для получения количества строк
+    fun getRowCount(): Int {
+        return tableData.size
+    }
+
+    // Метод для получения количества столбцов
+    fun getColumnCount(): Int {
+        return if (tableData.isNotEmpty()) tableData[0].size else 0
     }
 }
