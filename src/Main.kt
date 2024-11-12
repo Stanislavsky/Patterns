@@ -74,10 +74,14 @@ fun main() {
 
     println("Все элементы в Data_list (упорядоченные): ${dataList.getElements()}")
 
-    
+
     dataList.select(2)
     dataList.select(0)
 
     val selectedIds = dataList.get_selected()
     println("Индексы выделенных элементов: $selectedIds")
+
+
+    val names = dataList.get_names()
+    println("Наименования атрибутов: $names")
 }

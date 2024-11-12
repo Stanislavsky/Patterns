@@ -1,6 +1,6 @@
-class Data_list<T : Comparable<T>>(elements: List<T>) {
+class Data_list<T : Any>(elements: List<T>) {
 
-    private val data: List<T> = elements.sorted()
+    private val data: List<T> = elements
 
     private val selectedIndexes: MutableList<Int> = mutableListOf()
 
@@ -16,5 +16,16 @@ class Data_list<T : Comparable<T>>(elements: List<T>) {
 
     fun get_selected(): List<Int> {
         return selectedIndexes.toList()
+    }
+
+    fun get_names(): List<String> {
+        val firstElement = data.firstOrNull()
+        if (firstElement == null) {
+            throw IllegalArgumentException("Список пуст или элементы не имеют полей.")
+        }
+
+        val fields = firstElement::class.java.declaredFields.map { it.name }
+
+        return fields.filter { it != "id" }
     }
 }
