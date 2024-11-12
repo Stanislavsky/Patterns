@@ -51,8 +51,22 @@ fun main() {
 //    println("Элемент в строке 1, столбце 1: ${dataTable.getElement(1, 1)}")
 //    println("Элемент в строке 2, столбце 2: ${dataTable.getElement(1, 2)}")
 
-    val elements = listOf("John", "Anna", "Bob", "Jane")
-    val dataList = Data_list(elements)
+    val numbers = listOf(5, 2, 8, 3, 1)
+    val dataList = Data_list(numbers)
 
-    println("Элементы в dataList (упорядоченные): ${dataList.getElements()}")
+    println("Все элементы в Data_list (упорядоченные): ${dataList.getElements()}")
+
+    try {
+        val selectedElement = dataList.select(2)
+        println("Элемент с индексом 2: $selectedElement")
+    } catch (e: IndexOutOfBoundsException) {
+        println("Ошибка: ${e.message}")
+    }
+
+    try {
+        val invalidElement = dataList.select(10)
+        println("Элемент с индексом 10: $invalidElement")
+    } catch (e: IndexOutOfBoundsException) {
+        println("Ошибка: ${e.message}")
+    }
 }
