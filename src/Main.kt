@@ -21,6 +21,10 @@ fun main() {
 
     val studentData = " 1, Максюта Станисалв Витальевич, https://github.com/johndoe, +72345678901"
     val student = Student(studentData)
-    println("Student Info: ${student.getInfo()}")
-
+//    println("Student Info: ${student.getInfo()}")
+    val students = student.read_from_txt("src/students.txt")
+    println("Список студентов:")
+    students.forEach { student ->
+        println(student.getInfo())
+    }
 }

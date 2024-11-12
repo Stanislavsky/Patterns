@@ -1,3 +1,6 @@
+import java.io.File
+import java.io.IOException
+
 open class StudentBase(
     var id: Int,
     var fullName: String,
@@ -5,7 +8,8 @@ open class StudentBase(
     var contact: String
 ) {
 
-    companion object {
+    companion object
+    {
         fun parseData(data: String): List<String> {
             val parts = data.split(",").map { it.trim() }
             if (parts.size != 4) {
@@ -46,6 +50,30 @@ open class StudentBase(
             }
             return contact
         }
+    }
+
+    fun read_from_txt(filePath: String): List<Student> {
+        val file = File(filePath)
+        if (!file.exists() || !file.canRead()) {
+            throw IllegalArgumentException("Некорректный путь к файлу или файл не доступен для чтения.")
+        }
+
+        val students = mutableListOf<Student>()
+
+        try {
+            file.forEachLine { line ->
+                try {
+                    val student = Student(line)
+                    students.add(student)
+                } catch (e: Exception) {
+                    throw IllegalArgumentException("Ошибка при парсинге данных для строки: '$line'. ${e.message}")
+                }
+            }
+        } catch (e: IOException) {
+            throw IOException("Ошибка при чтении файла: ${e.message}")
+        }
+
+        return students
     }
 
     private fun getInitials(): String {
