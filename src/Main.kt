@@ -38,13 +38,17 @@ fun main() {
 //        println("Произошла ошибка при записи в файл: ${e.message}")
 //    }
 
-
     val tableData = arrayOf(
         arrayOf(1, "John", 25),
         arrayOf(2, "Jane", 30)
     )
+
     val dataTable = Data_table(tableData)
+
     println("Количество строк: ${dataTable.rowCount()}")
     println("Количество столбцов: ${dataTable.columnCount()}")
+
+    println("Элемент в строке 1, столбце 1: ${dataTable.getElement(1, 1)}")
+    println("Элемент в строке 2, столбце 2: ${dataTable.getElement(1, 2)}")
 
 }

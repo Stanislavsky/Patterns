@@ -6,11 +6,11 @@ class Data_table<T>(inputData: Array<Array<T>>) {
 
     fun columnCount(): Int = if (data.isNotEmpty()) data[0].size else 0
 
-    private fun getElement(row: Int, column: Int): T? {
+    fun getElement(row: Int, column: Int): T? {
         return if (row in data.indices && column in data[row].indices) {
             data[row][column]
         } else {
-            null
+            throw IndexOutOfBoundsException("Неверные индексы: строка $row, столбец $column")
         }
     }
 }
