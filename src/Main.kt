@@ -27,4 +27,15 @@ fun main() {
     students.forEach { student ->
         println(student.getInfo())
     }
+
+    val filePath = "src/"
+    val fileName = "students_output.txt"
+
+    try {
+        student.write_to_txt(filePath, fileName, students)
+        println("Список студентов успешно записан в файл $fileName.")
+    } catch (e: Exception) {
+        println("Произошла ошибка при записи в файл: ${e.message}")
+    }
+
 }

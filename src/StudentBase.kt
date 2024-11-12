@@ -52,6 +52,27 @@ open class StudentBase(
         }
     }
 
+    fun write_to_txt(filePath: String, fileName: String, students: List<Student>) {
+        // Проверка на корректность пути и имени файла
+        if (filePath.isEmpty() || fileName.isEmpty()) {
+            throw IllegalArgumentException("Адрес или имя файла не должны быть пустыми.")
+        }
+
+        val file = File(filePath, fileName)
+
+        try
+        {
+            file.printWriter().use { writer ->
+                students.forEach { student ->
+                    writer.println("${student.id}, ${student.fullName}, ${student.git}, ${student.contact}")
+                }
+            }
+        } catch (e: IOException) {
+
+            throw IOException("Ошибка при записи данных в файл: ${e.message}")
+        }
+    }
+
     fun read_from_txt(filePath: String): List<Student> {
         val file = File(filePath)
         if (!file.exists() || !file.canRead()) {
