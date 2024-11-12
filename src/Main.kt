@@ -69,16 +69,34 @@ fun main() {
 //    } catch (e: IndexOutOfBoundsException) {
 //        println("Ошибка: ${e.message}")
 //    }
+//    val students = listOf(
+//        Student(1, "John Doe", "https://github.com/johndoe", "+1234567890"),
+//        Student(2, "Jane Smith", "https://github.com/janesmith", "+0987654321")
+//    )
+//
+//    val dataList = Data_list(students)
+//
+//    val dataTable = dataList.get_data()
+//
+//    for (row in dataTable.getTableData()) {
+//        println(row.joinToString(", "))
+//    }
+
     val students = listOf(
-        Student(1, "John Doe", "https://github.com/johndoe", "+1234567890"),
-        Student(2, "Jane Smith", "https://github.com/janesmith", "+0987654321")
+        Student_short(1, "Иванов И.И.", "https://github.com/ivanov", "+79001234567"),
+        Student_short(2, "Петров П.П.", "https://github.com/petrov", "+79007654321"),
+        Student_short(3, "Сидоров С.С.", "https://github.com/sidorov", "+79009876543")
     )
 
-    val dataList = Data_list(students)
+    val dataList = Data_list_student_short(students)
 
     val dataTable = dataList.get_data()
 
-    for (row in dataTable.getTableData()) {
-        println(row.joinToString(", "))
+    println("Таблица данных:")
+    (dataTable.data as Array<Array<Any>>).forEach { row ->
+        println(row.joinToString(" | ") { it.toString() })
     }
+
+    val selectedStudent = dataList.select(1)  // Выбираем второго студента (индекс 1)
+    println("\nВыбранный студент: ${selectedStudent.fullName}, ${selectedStudent.git}, ${selectedStudent.contact}")
 }
