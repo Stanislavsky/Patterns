@@ -74,6 +74,7 @@ fun main() {
 
     println("Все элементы в Data_list (упорядоченные): ${dataList.getElements()}")
 
+    
     dataList.select(2)
     dataList.select(0)
 
